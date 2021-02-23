@@ -1,0 +1,177 @@
+/* Main Container */
+.flex-container {
+    display: flex;
+    flex-direction: column;
+
+    background: #464650;
+    border: 10px solid #303036;
+
+    width: 500px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Row / Column Classes */
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+
+
+/* Set Text Font And Color */
+body {
+    color: #f8f8f8;
+    font-family: FreeMono, monospace;
+}
+
+
+
+/* Board / Canvas */
+#canvas {
+    height: 500px;
+    border-bottom: 10px solid #303036;
+    background-color: #707086;
+}
+canvas {
+    position: absolute;
+    z-index: 0;
+}
+
+
+
+/* Buttons */
+#buttons {
+    border-bottom: 10px solid #303036;
+    padding: 10px;
+}
+
+
+
+/* Options */
+#options {
+    display: flex;
+    padding: 1%;
+    border-bottom: 10px solid #303036;
+}
+.option { padding: 5px }
+
+
+
+/* Slider */
+#slider-container {
+    display: block;
+    padding: 5px;
+}
+#slider {
+    width: 95%;
+}
+
+
+
+/* Labels */
+label {
+    margin: 1px 0px;
+    padding: 3px 0px;
+}
+
+
+
+/* Buttons */
+button {
+    cursor: pointer;
+    
+	border: 2px solid #f8f8f8;
+	border-radius: 4px;
+    
+    font-size: 13px;
+    color: #f8f8f8;
+    font-family: FreeMono, monospace;
+
+    padding: 3px 6px;
+    background-color: #dfdfdf00;
+}
+button:hover { background-color: #c7c7c757; }
+
+
+
+/* Number input boxes */
+input[type="number"] {
+    cursor: pointer;
+    width: 60px;
+    color: red;
+	border: 2px solid #afafaf;
+	border-radius: 4px;
+
+    font-size: 13px;
+    color: #404044;
+    font-family: FreeMono, monospace;
+
+    padding: 3px 6px;
+    margin: 1px 0px;
+}
+input[type="number"]:hover { border: 2px solid #f8f8f8; }
+
+
+
+/* Selection boxes */
+select {
+    cursor: pointer;
+
+	border: 2px solid #afafaf;
+    border-radius: 3px;
+
+    font-size: 13px;
+    color: #050505;
+    font-family: FreeMono, monospace;
+    
+    background-color: #f8f8f8;
+	padding: 3px 6px;
+}
+select:hover { border: 2px solid #f8f8f8; }
+
+
+
+/* Dropdowns */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    text-align: center;
+
+    border: 5px solid #d4d4d4;
+	border-radius: 3px;
+
+    box-shadow: 0px 8px 16px 0px #1f1f1f;
+    background-color: #dfdfdf;
+
+    min-width: max-content;
+}
+
+.dropdown-content > button {
+    border: none;
+    display: block;
+    width: 100%;
+
+    font-size: 15px;
+    color: #050505;
+    font-family: FreeMono, monospace;
+
+    padding: 8px;
+    background-color: #ffffff00;
+}
+.dropdown-content > button:hover { background-color: #f8f8f8; }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+
+
+    <!-- CSS and Javascript -->
+    <link rel="stylesheet" href="index.css" type="text/css">
+    <script type="text/javascript" src="./index.js"></script>
+
+
+    <!-- Fontawesome Icons -->
+    <script src="https://kit.fontawesome.com/c9ebb0691e.js"></script>
+
+</head>
+<body onload="start()">
+
+    <!-- Home button -->
+    <style> #home-button { color: #333333; font-size: 20px; }
+    #home-button:hover { color: #888888; } </style>
+    <a id="home-button" href="/"><i class="fas fa-home fa-2x"></i></a>
+
+
+    <!-- Stats -->
+    <div id="stats-container">
+        <div class="row">
+        <div class="column">
+            
+            <p id="lives">Lives:</p>
+            <p id="mines">Mines:</p>
+
+        </div>
+        <div class="column">
+        
+            <p id="time">Time:</p>
+
+        </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Table -->
+    <table id="table"></table>
+
+</body>
+</html>

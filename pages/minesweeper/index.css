@@ -1,0 +1,115 @@
+/* Body */
+body {
+    font-family: Freemono, monospace;
+}
+
+
+
+/* Paragraphs */
+p {
+    margin: 0px;
+}
+
+
+
+/* Table */
+table {
+    margin-left: auto;
+    margin-right: auto;
+
+    border: 5px solid #242424;
+    border-collapse: collapse; 
+}
+
+
+
+/* Columns and Rows */
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+
+
+/* Stats Container */
+#stats-container {
+    margin-bottom: 10px;
+    
+    width: max-content;
+
+    padding: 5px;
+
+    border: 5px solid #242424;
+    
+    background-color: #b3b3b3;
+}
+#stats-container p {
+    margin: 5px;
+    
+    overflow: hidden;
+    white-space: nowrap;
+
+    padding: 5px;
+}
+
+
+
+/* Input Boxes */
+input[type="number"] {
+    width: 60px;
+}
+
+
+
+/* Cell Text */
+td div {
+    font-size: 22px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 22px;
+    height: 22px;
+}
+
+img {
+    width: 22px;
+    height: 22px;   
+}
+
+
+/* Cell Background */
+td {
+    width: inherit;
+    height: inherit;
+
+    box-shadow: 0.5px 0.5px 0px #5d5e63 inset;
+
+    user-select: none;
+    cursor: pointer;
+
+    background-color: #a8a8a8;
+}
+
+td:hover { background-color: #9c9ca3; }
+
+
+
+/* Hidden Cell Background */
+td.hidden {
+    box-shadow: -1px -1px 1px 1px #00000030 inset,
+    1px 1px 1px 1px #ffffff30 inset;
+
+    background-color: #b3b3b3;
+}
+td.hidden:hover { background-color: #aaaab3; }

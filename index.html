@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/c9ebb0691e.js"></script>
+    
+</head>
+<body onload="init();">
+
+<!-- Navbar-->
+<div class="navbar">
+
+    <!-- Sidebar button -->
+    <div id="bars" onclick="toggleMenu()">
+        <div id="bar1"></div>
+        <div id="bar2"></div>
+        <div id="bar3"></div>
+    </div>
+
+
+    <!-- Home button -->
+    <a id="home-button" href="/">
+        <i class="fas fa-home fa-2x"></i>
+    </a>
+
+</div>
+
+
+<!-- Sidebar -->
+<div id="sidebar" class="column"></div>
+
+
+<!-- Page content -->
+<div class="container">
+    <p class="title">What is this?</p>
+    <p>
+        This is website.<br>
+        You can play some simple games I made by going to the
+        <span onclick="toggleMenu()" style="color: #3c48b4;"><b>siderbar</b></span>,
+        then clicking on the one you want to play.
+    </p>
+</div>
+</body>
+</html>

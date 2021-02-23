@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bounce!</title>
+    
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css"/>
+
+    <link rel="shortcut icon" href="ball-logo.ico"/>
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/c9ebb0691e.js"></script>
+
+</head>
+<body onLoad="init();">
+    
+    <!-- Home button -->
+    <style> #home-button { color: #333333; font-size: 20px; }
+    #home-button:hover { color: #888888; } </style>
+    <a id="home-button" href="/"><i class="fas fa-home fa-2x"></i></a>
+
+<p id="mmm"></p>
+
+<div class="flex-container">
+
+    <!-- Canvas -->
+    <div id="canvas">
+
+        <canvas id="paths"></canvas>
+        <canvas id="trails"></canvas>
+        <canvas id="balls"></canvas>
+
+    </div>
+
+
+
+    <!-- Buttons -->
+    <div id="buttons" style="text-align: left;">
+
+        <button onclick="pause()" id="pause">Pause</button>
+
+        <button onclick="clearCanvas()">Clear Screen</button>
+        
+        <div class="dropdown">
+            <button class="dropdown-button">Reset Balls <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <button onclick="resetColors()">Reset Colors</button>
+                <button onclick="resetSpeeds()">Reset Speeds</button>
+                <button onclick="resetSizes()">Reset Sizes</button>
+                <button onclick="resetPositions()">Reset Positions</button>
+                <button onclick="resetBalls()">Reset Balls</button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Options -->
+    <div id="options" class="row">
+
+        <!-- Options Column 1 -->
+        <div class="column">
+
+
+            <!-- Ball Outlines -->
+            <div class="option">
+                <input type="checkbox" id="ballOutlines">
+                <label for="ballOutlines">Ball Outlines</label>
+            </div>
+
+
+            <!-- Ball Path -->
+            <div class="option">
+                <input type="checkbox" id="ballPaths">
+                <label for="ballPaths">Ball Paths</label>
+            </div>
+
+
+            <!-- Ball Trails -->
+            <div class="option">
+                <input type="checkbox" id="ballTrails">
+                <label for="ballTrails">Ball Trails</label>
+            </div>
+
+
+            <!-- Stats -->
+            <div class="option">
+                <input type="checkbox" id="ballStats">
+                <label for="ballStats">Ball Stats</label>
+            </div>
+            
+
+            <!-- Palletes -->
+            <div class="option">
+                <label for="palletes">Pallete:</label>
+                    
+                <select id="palletes">
+                    <option value="light">Light</option>
+                    <option value="grey">Grey</option>
+                    <option value="fire">Fire</option>
+                    <option value="sunset">Sunset</option>
+                    <option value="sweet">Sweet</option>
+                    <option value="rainbow">Rainbow</option>
+                    <option value="rgb">RGB</option>
+                </select>
+            </div>
+
+            
+            <!-- Patterns -->
+            <div class="option">
+                <label for="patterns">Trail Pattern:</label>
+                    
+                <select id="trailPattern">
+                    <option value="none">None</option>
+                    <option value="outlined">Outlined</option>
+                </select>
+            </div> 
+
+
+        </div>
+
+
+
+        <!-- Options Column 2 -->
+        <div class="column">
+
+
+            <!-- Speed -->
+            <div class="option row">
+        
+                <div class="column">
+                    <label for="speed">Speed:</label>
+                    <label for="speedDiffer">Speed Differ:</label>
+                </div>
+
+                <div class="column">
+                    <input id="speed" type="number" min="1" max="100" value="20"/>
+                    <input id="speedDiffer" type="number" min="0" max="100" value="5"/>
+                </div>
+
+            </div> 
+
+            
+            <!-- Size -->
+            <div class="option row">
+        
+                <div class="column">
+                    <label for="size">Size:</label>
+                    <label for="sizeDiffer">Size Differ:</label>
+                </div>
+
+                <div class="column">
+                    <input id="size" type="number" min="1" max="100" value="20"/>
+                    <input id="sizeDiffer" type="number" min="0" max="100" value="5"/>
+                </div>
+
+            </div> 
+              
+    
+            <!-- Bounce -->
+            <div class="option">
+                <label for="bounceType">Bounce Type:</label>
+                    
+                <select id="bounceType">
+                    <option value="about90">About 90°</option>
+                    <option value="90">90°</option>
+                    <option value="random">Random</option>
+                    <option value="curved90">Curved 90°</option>
+                    <option value="180">180°</option>
+                </select>
+            </div> 
+
+        </div>
+    
+    </div>
+
+
+
+    <!-- Slider -->
+    <div id="slider-container">
+
+        <div style="text-align: left; padding: 10px;">
+            <label for="balls">Balls:</label>
+            <input id="ballAmount" type="number" min="0" max="250" value="1"/>
+        </div>
+
+        <div style="text-align: center;">
+            <input id="slider" type="range" min="0" max="250" value="1"/>
+        </div>
+        
+
+    </div>
+
+</div>
+</body>
+</html>
