@@ -6,7 +6,7 @@ const toNum = (num) => parseInt(num, 10);
 const getDiffrence = (a, b) => a > b ? a - b : b - a;
 
 const createPallete = (length, hsl) => {
-    return new Array(length).fill().map((_, i) => `hsl(${hsl})`.replace("&", i));
+    return new Array(length).fill().map((_, i) => `hsl(${hsl})`.replaceAll("&", i));
 };
 
 const palletes = [
@@ -16,7 +16,7 @@ const palletes = [
     { name: "sunset", colors: ["#f8b195", "#f67280", "#c06c84", "#6c5b7b", "#355c7d"] },
     { name: "sweet", colors: ["#a8e6ce", "#dcedc2", "#ffd3b5", "#ffaaa6", "#ff8c94"] },
     { name: "rgb", colors: ["#ff0000", "#00ff00", "#0000ff"] },
-    { name: "rainbow", colors: createPallete(361, "&, &%, &%") },
+    { name: "rainbow", colors: createPallete(361, "&, 100%, 75%") },
 ];
 
 
@@ -32,6 +32,7 @@ const height = 500;
 // Varibles needed to be accessed out of their scope
 let speed, size, pallete, layers;
 const elements = {};
+let shapes = {};
 
 // Array to store all balls
 const balls = [];
@@ -41,6 +42,10 @@ const balls = [];
 // Initalization function
 function init() {
 
+    elements.ballOutlines = document.getElementById("ballOutlines");
+    elements.ballPaths = document.getElementById("ballPaths");
+    elements.ballTrails = document.getElementById("ballTrails");
+
     setupSpeedAndSize();
     syncSlider();
 
@@ -48,6 +53,7 @@ function init() {
     setupPalletes();
     setupMinMax();
     setupLayers();
+    setupShapes();
 
     updateBallAmount();
 
@@ -78,12 +84,18 @@ class Ball {
         this.resetSpeed();
 
         this.resetPosition();
+
+        this.resetShape();
+
         this.square = Math.random() > 0.5 ? true : false;
+
         balls.push(this);
     }
 
     reset() {
-        this.resetColor(); this.resetPosition(); this.resetSize(); this.resetSpeed();
+        this.resetColor(); this.resetPosition();
+        this.resetSize(); this.resetSpeed();
+        this.resetShape();
     }
 
     resetPosition() {
@@ -97,9 +109,18 @@ class Ball {
         this.speed = randrange(speed.min, speed.max);
     }
 
-    resetSize() { this.size = randrange(size.min, size.max); }
+    resetSize() {
+        this.size = randrange(size.min, size.max);
+    }
 
-    resetColor() { this.color = pallete.colors[Math.floor(Math.random() * pallete.colors.length)]; }
+    resetColor() {
+        this.color = pallete.colors[Math.floor(Math.random() * pallete.colors.length)];
+    }
+
+    resetShape() {
+        this.shape = shapes[Math.floor(Math.random() * shapes.length)];
+    }
+
 
     move() {
         const bounceType = document.getElementById("bounceType").value;
@@ -194,6 +215,7 @@ class Ball {
     }
 
     draw() {
+        const ball = this;
         const ballsLayer = getLayer("balls");
         const trailsLayer = getLayer("trails");
         const pathsLayer = getLayer("paths");
@@ -206,10 +228,10 @@ class Ball {
             layer.fill();
         };
 
-        const sqaure = (layer, x, y, sqaureSize, color) => {
-            sqaureSize *= 2;
+        const square = (layer, x, y, squareSize, color) => {
+            squareSize *= 2;
             layer.beginPath();
-            layer.rect(x - sqaureSize / 2, y - sqaureSize / 2, sqaureSize, sqaureSize);
+            layer.rect(x - squareSize / 2, y - squareSize / 2, squareSize, squareSize);
             layer.fillStyle = color;
             layer.fill();
         };
@@ -220,6 +242,18 @@ class Ball {
             layer.stroke();
         };
 
+        const drawShape = (layer, x, y, bsize, color) => {
+            switch (ball.shape) {
+                case "square":
+                    square(layer, x, y, bsize, color);
+                break;
+
+                case "circle":
+                    circle(layer, x, y, bsize, color);
+                break;
+            }
+        };
+
 
         // Rainbow balls
         if (pallete.name === "rainbow") {
@@ -228,21 +262,18 @@ class Ball {
             this.color = pallete.colors[next];
         }
 
-
         // Draw ball
-        this.square
-        ? sqaure(ballsLayer, this.x, this.y, this.size, this.color)
-        : circle(ballsLayer, this.x, this.y, this.size, this.color);
+        drawShape(ballsLayer, this.x, this.y, this.size, this.color);
 
 
         // Ball outlines
-        if (ballOutlines.checked) outline(ballsLayer);
+        if (elements.ballOutlines.checked) outline(ballsLayer);
 
 
         // Ball trails
-        if (ballTrails.checked) {
+        if (elements.ballTrails.checked) {
             const trailPattern = document.getElementById("trailPattern");
-            circle(trailsLayer, this.x, this.y, this.size, this.color);
+            drawShape(trailsLayer, this.x, this.y, this.size, this.color);
 
             switch (trailPattern.value) {
                 case "outlined":
@@ -253,7 +284,7 @@ class Ball {
 
 
         // Ball paths
-        if (ballPaths.checked) {
+        if (elements.ballPaths.checked) {
             pathsLayer.beginPath();
             pathsLayer.moveTo(this.x, this.y);
 
@@ -267,6 +298,32 @@ class Ball {
             pathsLayer.stroke();
         }
     }
+}
+
+
+
+// Set up shapes
+function setupShapes() {
+    // Get all the checkboxes
+    const checkboxes = Array.from(document.getElementById("shapes")
+    .querySelectorAll("* > *")).filter((e) => e.type === "checkbox");
+
+    const circle = checkboxes.find((c) => c.id === "shapes-circle");
+
+    // Function to set shapes to the checked checkboxes
+    const setShapes = () => {
+        shapes = checkboxes.filter((c) => c.checked)
+        .map((c) => c.id.replace("shapes-", ""));
+    };
+    setShapes();
+
+    // When box is clicked set shapes
+    checkboxes.forEach((box) => box.onclick = (event) => {
+        if (!box.checked && checkboxes.filter((c) => c.checked).length === 0) {
+            return circle.checked = true;
+        }
+        setShapes();
+    });
 }
 
 
@@ -358,11 +415,6 @@ function setupLayers() {
         layer.height = height;
         layer.innerHTML = "Your browser doesn't support canvas";
     });
-
-
-    elements.ballOutlines = document.getElementById("ballOutlines");
-    elements.ballPaths = document.getElementById("ballPaths");
-    elements.ballTrails = document.getElementById("ballTrails");
 }
 
 function clearCanvas() {
@@ -380,15 +432,17 @@ function getLayer(id) {
 
 
 // Reset functions
-function resetColors() { balls.forEach((ball) => ball.resetColor()); }
+function resetColors() { balls.forEach((b) => b.resetColor()); }
 
-function resetSpeeds() { balls.forEach((ball) => ball.resetSpeed()); }
+function resetSpeeds() { balls.forEach((b) => b.resetSpeed()); }
 
-function resetSizes() { balls.forEach((ball) => ball.resetSize()); }
+function resetShapes() { balls.forEach((b) => b.resetShape()); }
 
-function resetPositions() { balls.forEach((ball) => ball.resetPosition()); }
+function resetSizes() { balls.forEach((b) => b.resetSize()); }
 
-function resetBalls() { balls.forEach((ball) => ball.reset()); }
+function resetPositions() { balls.forEach((b) => b.resetPosition()); }
+
+function resetBalls() { balls.forEach((b) => b.reset()); }
 
 
 
@@ -405,19 +459,23 @@ function pause() {
 function setupDropdowns() {
     Array.from(document.getElementsByClassName("dropdown")).forEach((dropdown) => {
 
-        const button = document.getElementsByClassName("dropdown-button")[0];
-        const content = document.getElementsByClassName("dropdown-content")[0];
+        const button = dropdown.querySelectorAll(".dropdown-button")[0];
+        const content = dropdown.querySelectorAll(".dropdown-content")[0];
 
-        // When button is clicked make content visible
-        button.addEventListener("click", () => {
-            content.style.display = content.style.display === "block" ? "none" : "block";
-        });
+        // When button is clicked toggle visibility
+        button.onclick = (event) => {
+            content.style.display = content.style.display === "block"
+            ? "none" : "block";
+        };
 
         // When anything but content or button is clicked hide content
-        window.addEventListener("click", (event) => {
-            if (!event.target.matches(".dropdown-content > button")
-            && !event.target.matches(".dropdown-button")) content.style.display = "none";
-        });
+        window.onclick = (event) => {
+            if (content.style.display === "none") return;
+
+            if ([button, content].includes(event.target)) {
+                content.style.display === "none";
+            }
+        };
     });
 }
 

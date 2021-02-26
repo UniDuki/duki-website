@@ -49,9 +49,27 @@
                 <button onclick="resetColors()">Reset Colors</button>
                 <button onclick="resetSpeeds()">Reset Speeds</button>
                 <button onclick="resetSizes()">Reset Sizes</button>
+                <button onclick="resetShapes()">Reset Shapes</button>
                 <button onclick="resetPositions()">Reset Positions</button>
                 <button onclick="resetBalls()">Reset Balls</button>
             </div>
+        </div>
+
+
+        <div class="dropdown">
+            <button class="dropdown-button">Shapes <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content" id="shapes">
+
+                <div class="checkbox">
+                    <input type="checkbox" id="shapes-circle" checked="checked">
+                    <label for="shapes-circle">Circles</label>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" id="shapes-square">
+                    <label for="shapes-square">Squares</label>
+                </div>
+        </div>
         </div>
 
     </div>
@@ -171,7 +189,7 @@
                     <option value="curved90">Curved 90°</option>
                     <option value="180">180°</option>
                 </select>
-            </div> 
+            </div>
 
         </div>
     
@@ -195,5 +213,17 @@
     </div>
 
 </div>
+
+<div id="bar">
+    <h3 style="width: 100%; border-bottom: 1px solid #333333;">
+    Recent Changes</h3>
+    <p>- Added a ball stats button that does nothing</p>
+    <p>- Added a new shape and a shape selector system</p>
+    <p>- Number inputs now have a min and max</p>
+
+    <br>
+    <b>Performance updgrades coming soon! 🎉<b>
+</div>
+
 </body>
 </html>
