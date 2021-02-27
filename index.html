@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Website</title>
 
     <link rel="stylesheet" href="index.css">
     <script src="index.js"></script>
@@ -13,6 +13,12 @@
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/c9ebb0691e.js"></script>
     
+    <!-- Octokit -->
+    <script type="module">
+        import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
+        console.log(Octokit)
+    </script>
+
 </head>
 <body onload="init();">
 
@@ -48,6 +54,9 @@
         <span onclick="toggleMenu()" style="color: #3c48b4;"><b>siderbar</b></span>,
         then clicking on the one you want to play.
     </p>
+
+    <button onclick="toggleRainbow()">Rainbow</button>
 </div>
+
 </body>
 </html>
