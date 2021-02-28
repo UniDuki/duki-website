@@ -1,10 +1,22 @@
 let sidebar, bars;
 let sidebarCooldown = false;
 
+// Rainbow things
 let hue = 1;
 let rainbow = false;
 let rainbowLoop;
 
+
+let categories = [
+    { title: "Games", pages: [
+        { title: "Bounce", name: "bounce" },
+        { title: "Minesweeper", name: "minesweeper" },
+    ] },
+
+    { title: "Tools", pages: [
+        { title: "Combinations", name: "comb-calc" },
+    ] },
+];
 
 // Init function
 function init() {
@@ -12,15 +24,11 @@ function init() {
     bars = document.getElementById("bars");
 
     // Pages
-    const categories = [
-        { title: "Games", pages: [
-            { title: "Bounce", name: "bounce" },
-            { title: "Minesweeper", name: "minesweeper" },
-        ] },
-    ]
-    .map((ctg) => `<p class="row title">${ctg.title}</p>\n` + ctg.pages.map((page) =>
-    `<a href="/pages/${page.name}" class="row">${page.title}</a>`).join("\n"));
-
+    categories = categories.map((ctg) => {
+        return `<p class="row title">${ctg.title}</p>\n` + ctg.pages.map((page) => {
+            return `<a href="/pages/${page.name}" class="row">${page.title}</a>`;
+        }).join("\n");
+    });
     document.getElementById("sidebar").innerHTML = categories.join("\n");
 
     window.addEventListener("click", (event) => {
@@ -33,7 +41,11 @@ function init() {
             bars.classList.remove("change");
         }
     });
+
+    const t = document.getElementById("table");
+    new Util.Table(5, 5, t);
 }
+
 
 function toggleMenu() {
     sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
@@ -43,6 +55,7 @@ function toggleMenu() {
     sidebarCooldown = true;
     setTimeout(() => sidebarCooldown = false, 500);
 }
+
 
 function toggleRainbow() {
     // Toggle

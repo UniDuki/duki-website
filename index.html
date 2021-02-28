@@ -7,20 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website</title>
 
+    <!-- Util -->
+    <script type="text/javascript" src="/util.js"></script>
+
     <link rel="stylesheet" href="index.css">
     <script src="index.js"></script>
 
     <!-- Icons -->
     <script src="https://kit.fontawesome.com/c9ebb0691e.js"></script>
     
-    <!-- Octokit -->
-    <script type="module">
-        import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
-        console.log(Octokit)
-    </script>
+    
 
 </head>
 <body onload="init();">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <!-- Navbar-->
 <div class="navbar">
@@ -57,6 +58,8 @@
 
     <button onclick="toggleRainbow()">Rainbow</button>
 </div>
+
+<div id="table"></div>
 
 </body>
 </html>
