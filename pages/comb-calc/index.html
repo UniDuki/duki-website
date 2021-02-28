@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+
+
+    <!-- CSS and Javascript -->
+    <link rel="stylesheet" href="index.css" type="text/css">
+    <script type="text/javascript" src="./index.js"></script>
+
+
+    <!-- Fontawesome Icons -->
+    <script src="https://kit.fontawesome.com/c9ebb0691e.js"></script>
+
+</head>
+<body onload="init()">
+
+<!-- Home button -->
+<style> #home-button { color: #333333; font-size: 20px; }
+#home-button:hover { color: #888888; } </style>
+<a id="home-button" href="/"><i class="fas fa-home fa-2x"></i></a>
+
+<div id="container">
+
+
+    <!-- Options -->
+    <div id="options">
+
+        <label for="elements">Elements to generate combinations from:</label>
+    
+        <input type="text" placeholder="1, 2, 3, a, b, c" id="elements"></input>
+        <label for="elements" class="comment">(Seperate by commas)</label>
+
+
+        <br><br>
+        <label for="length">Length:</label>
+        <input type="number" value="3" id="length"></input>
+
+
+        <br><br>
+        <label for="joinby">Seperate By:</label>
+        <input type="text" value=",  " id="joinby"></input>
+        <label for="joinby" class="comment">(\n for newline)
+    
+
+        <br><br>
+        <button onclick="generate()">Generate</button>
+
+    </div>
+
+
+    <!-- Combinations -->
+    <div id="combs" style="color: #08080899;">
+        Generated combinations will appear here...
+    </div>
+
+
+</div>
+</body>
+</html>

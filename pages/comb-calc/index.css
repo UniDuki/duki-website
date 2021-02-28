@@ -1,0 +1,46 @@
+body {
+    color: #080808;
+    font-family: Freemono, monospace;
+}
+
+
+p {
+    margin: 2px;
+}
+
+
+.comment {
+    font-size: smaller;
+    color: #08080899;
+    font-style: italic;
+}
+
+
+#container {
+    width: 80%;
+
+    margin-right: auto;
+    margin-left: auto;
+
+    border-radius: 5px;
+    border: 3px solid #773636;
+}
+
+
+#options {
+    padding: 10px;
+    background-color: #ff9c62;
+}
+
+
+#combs {
+    height: 200px;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    border-top: 3px solid #773636;
+
+    padding: 10px;
+    background-color: #f3e855;
+}
