@@ -1,0 +1,139 @@
+/* Remove margin so navbar can be full width */
+body {
+    margin: 0px;
+}
+
+
+
+/* Navbar */
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    width: 100%;
+    position: sticky;
+    top: 0;
+
+    padding: 0px 5px;
+    background-color: #2a2a2c;
+}
+
+/* Container for navbar items */
+.navbar li {
+    cursor: pointer;
+    float: right;
+
+    padding: 10px;
+}
+
+
+
+/* Home button */
+#nav-home-btn {
+    font-size: 37px;
+    color: #f8f8f8;
+    
+    transition: 0.4s;
+}
+
+#nav-home-btn:hover { color: #fffd82 }
+
+
+
+/* Sidebar button */
+#nav-side-btn {
+    float: left;
+}
+
+#nav-side-btn > * {
+    background-color: #f8f8f8;
+    width: 32px;
+    height: 4px;
+    margin: 8px 0px;
+    transition: 0.4s;
+}
+
+#nav-side-btn:hover > * { background-color: #fffd82; }
+#nav-side-btn.change:hover > * { background-color: #ff6666; }
+
+
+.change > #nav-side-bar1 {
+    -webkit-transform: translate(0, 12px) rotate(45deg);
+    transform: translate(0, 12px) rotate(45deg);
+}
+
+.change > #nav-side-bar2 {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.change > #nav-side-bar3 {
+    -webkit-transform: translate(0, -12px) rotate(45deg);
+    transform: translate(0, -12px) rotate(45deg);
+}
+
+
+
+/* Sidebar */
+#sidebar {
+    list-style-type: none;
+    overflow: auto;
+    position: fixed;
+
+    transition: all 0.4s;
+    
+    margin: 0px;
+    padding: 0px;
+
+    height: 100%;
+    width: max-content;
+    transform: translateX(-102vw);
+
+    background-color: #48484d;
+}
+
+.sidebar-title {
+    text-align: center;
+    text-decoration: none;
+    color: #f8f8f8;
+
+    width: 100%;
+    
+    margin-top: 40px;
+    margin-bottom: 5px;
+
+    border-bottom: 1px solid #f8f8f8;
+}
+
+/* Sidebar pages */
+.sidebar-page {
+    text-decoration: none;
+}
+
+.sidebar-page > * {
+    cursor: pointer;
+
+    color: #f8f8f8;
+    padding: 10px;
+}
+
+.sidebar-page:hover > * {
+    color: #080808;
+    background-color: #fffd82;
+}
+
+
+
+
+#sidebar.active {
+    transform: translateX(0);
+    padding: 10px;
+}
+
+
+
+/* Give the original page content it's margin back */
+#page-content {
+    transition: all 0.4s;
+    margin: 10px;
+}

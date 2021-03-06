@@ -16,14 +16,13 @@
     <!-- Fontawesome Icons -->
     <script src="https://kit.fontawesome.com/c9ebb0691e.js"></script>
 
+
+    <script src="/navbar/navbar.js"></script>
+
 </head>
-<body onload="init()">
+<body onload="init(); initNavbar();">
 
-<!-- Home button -->
-<style> #home-button { color: #333333; font-size: 20px; }
-#home-button:hover { color: #888888; } </style>
-<a id="home-button" href="/"><i class="fas fa-home fa-2x"></i></a>
-
+    
 <div id="container">
 
 
@@ -49,7 +48,7 @@
 
         <br><br>
         <button onclick="generate()">Generate</button>
-
+ 
     </div>
 
 

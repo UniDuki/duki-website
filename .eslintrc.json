@@ -1,5 +1,4 @@
 {
-	"extends": "eslint:recommended",
 	"env": {
 		"node": true,
 		"es6": true
@@ -8,7 +7,7 @@
 		"ecmaVersion": 2019
 	},
 	"rules": {
-		"comma-dangle": ["error", "always-multiline"],
+		/* "comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
 		"comma-style": "error",
 		"curly": ["error", "multi-line", "consistent"],
@@ -40,6 +39,14 @@
         "key-spacing": ["error", { "mode": "minimum", "beforeColon": false, "afterColon": true }],
         "no-prototype-builtins": "off",
         "arrow-parens": ["error", "always"],
-        "no-case-declarations": "off"
+        "no-case-declarations": "off" */
+
+        "for-direction": "warn",
+        "getter-return": "warn",
+        "no-dupe-args": "error",
+        "no-dupe-else-if": "error",
+        "no-dupe-keys": "error",
+        "no-extra-boolean-cast": "error"
+        
     }
 }
