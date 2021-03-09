@@ -7,17 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website</title>
 
+    
+    <!-- CSS and Javascript -->
     <link rel="stylesheet" href="index.css">
     <script src="index.js"></script>
 
-    <!-- Icons -->
-    <script src="https://kit.fontawesome.com/c9ebb0691e.js"></script>
-    
 
+    <!-- Util -->
+    <script src="/util.js"></script>
+
+
+    <!-- Fontawesome Icons -->
+    <link href="/fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet">
+
+
+    <!-- Navbar -->
     <script src="/navbar/navbar.js"></script>
-
+    
 </head>
 <body onload="init(); initNavbar();">
+
+    <i class="fas fa-user"></i> <!-- uses solid style -->
+    <i class="far fa-user"></i> <!-- uses regular style -->
+    <i class="fal fa-user"></i> <!-- uses light style -->
+
+    <i class="fab fa-github-square"></i> <!-- uses brands style -->
+
+
+
+
 
     <p class="title">What is this?</p>
     <p>
@@ -29,31 +47,15 @@
 
     <button onclick="toggleRainbow()">Rainbow</button>
 
-</body>
-</html>
+    <table id="myTable"></table>
 
-<!-- 
+    <br>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website</title>
+    <script>
+        var t = document.getElementById("myTable");
 
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js"></script>
-
-    <script src="/navbar/navbar.js"></script>
-
-</head>
-<body onload="init(); initNavbar();">
-
-    code
+        new utilTable(10, 10, t);
+    </script>
 
 </body>
 </html>
-
- -->

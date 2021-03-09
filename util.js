@@ -7,11 +7,16 @@
     * @return {table} This table
 */
 class utilTable {
-    constructor(rows, columns, element) {
+    constructor(rows, columns, table) {
+
+        if (!rows) throw "utilTable Error: Unspecified amount of rows"
+        if (!columns) throw "utilTable Error: Unspecified amount of rows"
+        if (!table) throw "utilTable Error: No table element given"
 
         this.rows = rows;
         this.columns = columns;
-        this.html = element;
+        this.dom = table;
+        this.cells = []
 
         this.createTable();
 
@@ -20,14 +25,32 @@ class utilTable {
 
     createTable() {
         for (let rowID = 0; rowID < this.rows; rowID++) {
-            // ...
+
+            // Create row and all the cells inside of it
+            const row = document.createElement("tr");
 
             for (let colID = 0; colID < this.columns; colID++) {
-                // . . .
+                const td = document.createElement("td")
+
+                const cell = new utilTableCell()
+                this.cells.push(cell)
+
+                row.appendChild(td)
             }
+        
+            this.dom.appendChild(row)
         }
     }
 }
 
-// Export var
-const Util = { Table };
+class utilTableCell {
+    constructor(row, column, front, back) {
+        this.row = row
+        this.column = column
+
+        this.front = front
+        this.back = back
+
+        return this
+    }
+}

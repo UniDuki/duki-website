@@ -9,22 +9,34 @@ body {
 .navbar {
     list-style-type: none;
     margin: 0;
+    top: 0;
     overflow: hidden;
+
+    padding: 0px;
     width: 100%;
     position: sticky;
-    top: 0;
 
-    padding: 0px 5px;
     background-color: #2a2a2c;
 }
 
-/* Container for navbar items */
+/* Navbar items */
 .navbar li {
     cursor: pointer;
     float: right;
 
+    margin: auto;
+
     padding: 10px;
 }
+
+.navbar li > * {
+    font-size: 20px;
+    color: #f8f8f8;
+    
+    transition: 0.4s;
+}
+
+.navbar li:hover > * { color: #fffd82 }
 
 
 
