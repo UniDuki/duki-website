@@ -24,19 +24,19 @@ body {
     cursor: pointer;
     float: right;
 
-    margin: auto;
-
     padding: 10px;
 }
 
 .navbar li > * {
-    font-size: 20px;
     color: #f8f8f8;
-    
     transition: 0.4s;
 }
 
 .navbar li:hover > * { color: #fffd82 }
+
+.navbar-icon {
+    font-size: 36px;
+}
 
 
 

@@ -21,7 +21,7 @@ let table, timerLoop;
 
 
 // Start
-function start() {
+function init() {
 
     // Create a table and all the cells
     createTable();

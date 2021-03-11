@@ -1,4 +1,7 @@
-async function initNavbar() {
+window.addEventListener("load", async () => {
+    
+    if (typeof init !== "undefined") init()
+
     const html = await (await fetch("/navbar/navbar.html")).text()
 
     document.body.innerHTML = `
@@ -19,7 +22,7 @@ async function initNavbar() {
     `
 
     initSidebar()
-}
+})
 
 
 let sidebar, bars, body, sidebarOG;
