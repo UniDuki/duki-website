@@ -41,12 +41,53 @@
         "arrow-parens": ["error", "always"],
         "no-case-declarations": "off" */
 
-        "for-direction": "warn",
-        "getter-return": "warn",
+
+		"no-trailing-spaces": "error",
         "no-dupe-args": "error",
         "no-dupe-else-if": "error",
         "no-dupe-keys": "error",
-        "no-extra-boolean-cast": "error"
-        
+
+		"no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
+        "no-extra-boolean-cast": "error",
+        "for-direction": "warn",
+        "getter-return": "warn",
+
+        "no-empty": "error",
+        "no-empty-character-class": "error",
+        "no-ex-assign": "error",
+        "no-extra-semi": "error",
+		"spaced-comment": "error",
+        "yoda": "error",
+        "no-invalid-regexp": "error",
+        "no-irregular-whitespace": "error",
+        "no-obj-calls": "error",
+        "no-sparse-arrays": "error",
+        "use-isnan": "error",
+        "no-empty-pattern": "error",
+        "no-self-assign": "error",
+
+		"no-empty-function": "error",
+		"no-floating-decimal": "error",
+		"no-lonely-if": "error",
+        "no-var": "error",
+		"object-curly-spacing": ["error", "always"],
+		"prefer-const": "error",
+
+        "key-spacing": ["error", {
+            "mode": "minimum",
+            "beforeColon": false,
+            "afterColon": true
+        }],
+
+        "no-useless-catch": "error",
+        "no-useless-escape": "error",
+		"semi": ["warn", "always"],
+        "arrow-parens": ["error", "always"],
+        "comma-dangle": ["error", "always-multiline"],
+		"comma-spacing": "error",
+		"quotes": ["error", "double"],
+		"comma-style": ["error", "last"],
+		"curly": ["error", "multi-line", "consistent"],
+        "func-call-spacing": ["error", "never"]
     }
 }

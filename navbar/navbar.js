@@ -1,43 +1,10 @@
-window.addEventListener("load", async () => {
-    
-    if (typeof init !== "undefined") init()
+const randrange = (min, max) => Math.floor(Math.random() * ((max + 1) - min) + min);
 
-    const html = await (await fetch("/navbar/navbar.html")).text()
-
-    document.body.innerHTML = `
-
-        <!-- Navbar CSS -->
-        <link rel="stylesheet" href="/navbar/navbar.css">
-
-        <!-- Navbar HTML -->
-        ${html}
-
-        <!-- Sidebar -->
-        <ul id="sidebar"></ul>
-
-        <br style="user-select: none;">
-
-        <!-- Original Page -->
-        <div id="page-content">${document.body.innerHTML}<div>
-    `
-
-    initSidebar()
-})
-
-
-let sidebar, bars, body, sidebarOG;
 let sidebarCooldown = false;
 
-function initSidebar() {
-    body = document.getElementById("page-content")
-    sidebar = document.getElementById("sidebar");
-    bars = document.getElementById("nav-side-btn");
+async function initNavbar() {
 
-    // Make a clone of sidebar to always have the original sizes
-    sidebarOG = sidebar.cloneNode(true)
-
-
-    let categories = [
+    const categories = [
         { title: "Games", pages: [
             { title: "Bounce", name: "bounce" },
             { title: "Minesweeper", name: "minesweeper" },
@@ -47,31 +14,65 @@ function initSidebar() {
         ] },
     ];
 
-    // Format all the pages
-    categories = categories.map(ctg => {
-        const title = `<li class="sidebar-title">${ctg.title}</li>`
 
-        const pages = ctg.pages.map(page => {
-            return `<a href="/pages/${page.name}" class="sidebar-page">
-            <li>${page.title}</li></a>`
-        })
+    // Create the navbar
+    const navbarHTML = await (await fetch("/navbar/navbar.html")).text();
 
-        // Join them together
-        return title + pages.join("\n")
-    })
 
-    // Set the sidebar content
-    sidebar.innerHTML = categories.join("\n")
+    // Create the sidebar
+    const sidebarHTML = document.createElement("ul");
+    sidebarHTML.id = "sidebar";
 
-    // Hide sidebar if clicking on page
+    categories.forEach((ctg) => {
+
+        // Create the category title
+        const title = document.createElement("li");
+        title.classList.add("sidebar-title");
+        title.innerText = ctg.title;
+
+        sidebarHTML.appendChild(title);
+
+        // Create the category pages
+        ctg.pages.forEach((page) => {
+            const linkContainer = document.createElement("li");
+            linkContainer.classList.add("sidebar-page");
+
+            const link = document.createElement("a");
+            link.href = `/pages/${page.name}`;
+            link.innerText = page.title;
+
+            linkContainer.appendChild(link);
+            sidebarHTML.appendChild(linkContainer);
+        });
+    });
+
+
+    // Add the navbar and sidebar to the page
+    document.body.innerHTML = `
+        <link rel="stylesheet" href="/navbar/navbar.css">
+
+        ${navbarHTML}
+
+        ${sidebarHTML.outerHTML}
+
+        <br style="user-select: none;">
+
+        <div id="page-content">${document.body.innerHTML}<div>
+    `;
+
+
+    // Hide sidebar if page clicked
+    const sidebar = document.getElementById("sidebar");
+    const bars = document.getElementById("nav-side-btn");
+
     window.addEventListener("click", (event) => {
         if (
             !["nav-side-btn", "sidebar", "bar1", "bar2", "bar3"]
             .includes(event.target.id)
             && sidebar.classList.contains("active")
-            && sidebarCooldown !== true
+            && !sidebarCooldown
         ) {
-            toggleSidebar()
+            toggleSidebar();
             bars.classList.remove("change");
         }
     });
@@ -80,198 +81,58 @@ function initSidebar() {
 
 
 function toggleSidebar() {
-    sidebar.classList.toggle("active")
 
-    // Toggle bars
+    const sidebar = document.getElementById("sidebar");
+    const bars = document.getElementById("nav-side-btn");
+    const pageContent = document.getElementById("page-content");
+
+    sidebar.classList.toggle("active");
     bars.classList.toggle("change");
 
     sidebarCooldown = true;
-    setTimeout(() => sidebarCooldown = false, 400);
+    setTimeout(() => sidebarCooldown = false, 100);
 
 
     // Add left margin
     if (sidebar.classList.contains("active")) {
-        body.style.marginLeft = sidebar.offsetWidth + 30 + "px"
+        pageContent.style.marginLeft = sidebar.offsetWidth + 30 + "px";
     }
 
     // Remove left margin
     else {
-        body.style.marginLeft = "10px"
+        pageContent.style.marginLeft = "10px";
     }
 }
 
 
-/* Sidebar button */
 
-/* <div class="navbar">
+// Rainbow button
+let rainbowHue = randrange(0, 361);
+let rainbowAngle = randrange(0, 361);
+let rainbowLoopID;
 
+function toggleRainbow() {
+    if (!rainbowLoopID) {
+        rainbowLoopID = setInterval(() => {
 
+            rainbowHue ++;
+            rainbowAngle ++;
 
+            if (rainbowHue >= 361) rainbowHue = 0;
+            if (rainbowAngle >= 361) rainbowAngle = 0;
 
-    <!-- Sidebar button -->
-    <div id="bars" onclick="toggleMenu()">
-        <div id="bar1"></div>
-        <div id="bar2"></div>
-        <div id="bar3"></div>
-    </div>
+            document.body.style.backgroundImage = `linear-gradient(
+                ${rainbowAngle}deg,
+                hsl(${rainbowHue + 45}, 100%, 65%),
+                hsl(${rainbowHue}, 100%, 65%))`;
 
+        }, 50);
+    }
 
-    <!-- Home button -->
-    <a id="home-button" href="/">
-        <i class="fasfahomefa-2x"></i>
-    </a>
-
-</div>
-
-
-<!-- Sidebar -->
-<div id="sidebar" class="column"></div>
-
-let sidebar, bars;
-let sidebarCooldown = false;
-/* Titles *
-
-
-
-
-/* Navbar *
-.navbar {
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-
-    top: 0px;
-    position: fixed;
-
-    align-items: center;
-
-    position: fixed;
-    z-index: 2;
-    width: 100%;
-    background-color: #333333;
-    box-shadow: 0px 2px 5px 0 #474747;
+    else {
+        document.body.style.backgroundColor = "#f8f8f8";
+        document.body.style.backgroundImage = null;
+        clearInterval(rainbowLoopID);
+        rainbowLoopID = undefined;
+    }
 }
-
-.navbar > * {
-    float: left;
-    color: #f8f8f8;
-    text-align: center;
-    padding: 10px 20px;
-    font-size: 17px;
-    transition: 0.4s;
-}
-
-.navbar > *:hover { color: #fffd82; }
-
-
-/* Sidebar *
-#sidebar {
-    min-width: max-content;
-    top: 0;
-    height: 100%;
-    overflow: auto;
-
-    background-color: #474a4e;
-
-    position: fixed;
-    z-index: 1;
-    
-    box-shadow: 1px 0px 3px 1px #00000088;
-
-    padding-top: 50px;
-    padding-bottom: 500px;
-    padding-right: 40px;
-    display: none;
-    text-align: center;
-}
-
-
-/* Sidebar titles *
-#sidebar > p {
-    border-bottom: 1px solid #f8f8f8;
-    color: #f8f8f8;
-
-    padding: 25px 20px 0px 20px;
-}
-
-
-/* Sidebar links *
-#sidebar > a {
-    border: none;
-    text-align: left;
-
-    text-decoration: none;
-    font-size: 16px;
-    color: #f8f8f8;
-    font-family: FreeMono, monospace;
-
-    padding: 10px 20px;
-}
-#sidebar > a:hover { background-color: #fffd82; color: #080808; }
-
-
-
-
-
-/* Home button *
-#home-button {
-    margin-left: auto;
-}
-
-
-/* Main page *
-.container {
-    margin: 100px 10px;
-}
-
-/* Menu button *
-#bars {
-    display: inline-block;
-    cursor: pointer;
-}
-
-
-const categories = [
-    { title: "Games", pages: [
-        { title: "Bounce", name: "bounce" },
-        { title: "Minesweeper", name: "minesweeper" },
-    ] },
-
-    { title: "Tools", pages: [
-        { title: "Combinations", name: "comb-calc" },
-    ] },
-];
-
-// Init function
-function init() {
-
-    // Load the
-    $.get("/", function(data) {
-        console.log(data);
-    });
-
-
-    // Sidebar stuff
-    sidebar = document.getElementById("sidebar");
-    bars = document.getElementById("bars");
-
-    window.addEventListener("click", (event) => {
-        if (
-            !["bars", "sidebar", "bar1", "bar2", "bar3"].includes(event.target.id)
-            && sidebar.style.display === "block"
-            && sidebarCooldown !== true
-        ) {
-            sidebar.style.display = "none";
-            bars.classList.remove("change");
-        }
-    });
-}
-
-function toggleMenu() {
-    sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
-
-    bars.classList.toggle("change");
-
-    sidebarCooldown = true;
-    setTimeout(() => sidebarCooldown = false, 500);
-}*/

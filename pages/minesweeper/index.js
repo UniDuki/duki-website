@@ -23,6 +23,8 @@ let table, timerLoop;
 // Start
 function init() {
 
+    initNavbar();
+
     // Create a table and all the cells
     createTable();
 

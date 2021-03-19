@@ -42,6 +42,8 @@ const balls = [];
 // Initalization function
 function init() {
 
+    initNavbar();
+
     elements.ballOutlines = document.getElementById("ballOutlines");
     elements.ballPaths = document.getElementById("ballPaths");
     elements.ballTrails = document.getElementById("ballTrails");

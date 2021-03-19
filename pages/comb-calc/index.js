@@ -1,5 +1,8 @@
 function init() {
-    // . . .
+
+    initNavbar();
+
+    generate();
 }
 
 
