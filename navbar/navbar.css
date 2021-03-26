@@ -1,41 +1,52 @@
 /* Remove margin so navbar can be full width */
 body {
     margin: 0px;
+    height: 100%;
 }
 
 
 
 /* Navbar */
-.navbar {
+#navbar {
     list-style-type: none;
     margin: 0;
     top: 0;
     overflow: hidden;
 
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
     padding: 0px;
     width: 100%;
-    position: sticky;
+    position: static;
 
-    background-color: #2a2a2c;
+    background-color: #1c1c22;
 }
 
 /* Navbar items */
-.navbar li {
+#navbar li {
     cursor: pointer;
-    float: right;
 
     padding: 10px;
+
+    margin: 0 5px;
 }
 
-.navbar li > * {
+#navbar li > * {
     color: #f8f8f8;
     transition: 0.4s;
 }
 
-.navbar li:hover > * { color: #fffd82 }
+#navbar li:hover > * { color: #ffcc66 }
 
 .navbar-icon {
     font-size: 36px;
+    height: 100%;
+}
+
+#navbar.active {
+    position: sticky;
 }
 
 
@@ -48,13 +59,11 @@ body {
     transition: 0.4s;
 }
 
-#nav-home-btn:hover { color: #fffd82 }
-
 
 
 /* Sidebar button */
 #nav-side-btn {
-    float: left;
+    flex-grow: 1;
 }
 
 #nav-side-btn > * {
@@ -65,7 +74,7 @@ body {
     transition: 0.4s;
 }
 
-#nav-side-btn:hover > * { background-color: #fffd82; }
+#nav-side-btn:hover > * { background-color: #ffcc66; }
 #nav-side-btn.change:hover > * { background-color: #ff6666; }
 
 
@@ -101,7 +110,7 @@ body {
     width: max-content;
     transform: translateX(-102vw);
 
-    background-color: #48484d;
+    background-color: #252530;
 }
 
 .sidebar-title {
@@ -130,17 +139,28 @@ body {
     color: #f8f8f8;
     padding: 10px;
 
-    background: linear-gradient(to right, #fffd82 50%, #00000000 50%);
-    background-size: 200% 100%;
+    background: linear-gradient(to right, #ffcc66 50%, #00000000 50%);
+    background-size: 205% 100%;
     background-position: bottom right;
 }
 
-.sidebar-page:hover {
+.sidebar-page:hover > * {
     color: #080808;
 
     background-position: bottom left;
     transition: all 0.4s;
 }
+
+
+.sidebar-info {
+    font-size: 12px;
+    font-style: italic;
+    color: #dadada;
+    
+    margin-top: 100%;
+    max-width: 200px;
+}
+
 
 #sidebar.active {
     transform: translateX(0);
@@ -151,6 +171,6 @@ body {
 
 /* Give the original page content it's margin back */
 #page-content {
-    transition: all 0.4s;
     margin: 10px;
+    transition: all 0.4s;
 }

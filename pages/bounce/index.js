@@ -40,9 +40,9 @@ const balls = [];
 
 
 // Initalization function
-function init() {
+async function init() {
 
-    initNavbar();
+    await initNavbar();
 
     elements.ballOutlines = document.getElementById("ballOutlines");
     elements.ballPaths = document.getElementById("ballPaths");

@@ -1,8 +1,6 @@
-function init() {
+async function init() {
 
-    initNavbar();
-
-    generate();
+    await initNavbar();
 }
 
 

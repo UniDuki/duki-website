@@ -21,9 +21,9 @@ let table, timerLoop;
 
 
 // Start
-function init() {
+async function init() {
 
-    initNavbar();
+    await initNavbar();
 
     // Create a table and all the cells
     createTable();
