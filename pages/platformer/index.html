@@ -9,7 +9,7 @@
 
 
     <!-- Title and Favicon -->
-    <title>doko</title>
+    <title>Platformer game</title>
     <link rel="shortcut icon" href="/images/logo.ico"/>
 
 
@@ -24,8 +24,15 @@
 
 </head>
 <body onload="init();">
-    
-    <p>Hello!</p>
 
+<div class="main-container">
+
+    <p><span id="fps">0</span> FPS</p>
+
+    <canvas id="screen" width="800" height="608">
+        Your browser does not support canvas.
+    </canvas>
+
+</div>
 </body>
 </html>
