@@ -205,13 +205,31 @@ class Rect {
         // Display its xv and yv
         if (debug) {
             ctx.beginPath();
-            ctx.fillStyle = "#080808";
-            ctx.font = "20px Freemono, monospace";
+            ctx.fillStyle = "#f8f8f8";
+            ctx.font = "15px Freemono, monospace";
             ctx.textAlign = "center";
             ctx.fillText(
-                `${this.xv}<br> ${this.yv}`,
+                `${this.x} ${this.y}`,
                 this.x + (this.width / 2), canvasY(this.y + this.height + 5),
             );
+            ctx.fillText(
+                `${this.xv} ${this.yv}`,
+                this.x + (this.width / 2), canvasY(this.y + this.height + 20),
+            );
+
+            ctx.strokeStyle = "#080808";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+
+            const x = this.x + this.width / 2;
+            const y = this.y + this.height / 2;
+            ctx.beginPath();
+            ctx.strokeStyle = this.color;
+            ctx.lineWidth = (this.width * this.height) / 100;
+            ctx.moveTo(x, canvasY(y));
+            ctx.lineTo(x + this.xv * 4, canvasY(y + this.yv * 4));
+            ctx.stroke();
         }
 
     }
