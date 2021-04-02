@@ -2,13 +2,20 @@ const items = [];
 let screen, ctx;
 let debug = false;
 
+const repeat = (times, fn) => {
+    for (let i = 0; i < times; i++) fn(i);
+};
+
 const canvasY = (i) => screen.height - i;
+
+const invert = (i) => i < 0 ? Math.abs(i) : -Math.abs(i);
 
 const pos = (i) => Math.abs(i);
 const neg = (i) => -Math.abs(i);
 
 
 async function init() {
+
     await initNavbar();
 
     screen = document.getElementById("screen");
@@ -23,17 +30,30 @@ async function init() {
     const fifth = Math.round(screen.height / 5);
     const half = (fifth / 2) + 25;
 
-    new Player((screen.width / 2) - 10, (screen.height / 2) - 10, 20, 20, "#fff04d", {
+    new Player((screen.width / 2) - 10, (screen.height / 2) - 10, 20, 20, "#78d6ff", {
         z: 1,
+        gravity: true,
     });
 
-    new Platform(50, (fifth * 2) - half, 250, 50, "#fc476b");
-    new Platform(50, (fifth * 4) - half, 250, 50, "#fc476b");
+    new Platform(150, (fifth * 4) - half, 150, 20, "#fffc57", {
+        collision: ["top"],
+    });
 
+    new Platform(150, (fifth * 3) - half, 150, 20, "#fffc57", {
+        collision: ["top"],
+    });
+    new Platform(screen.height - 50 * 2, (fifth * 3) - half, 250, 20, "#fffc57", {
+        collision: ["top"],
+    });
+
+    new Platform(150, (fifth * 2) - half, 250, 50, "#fc476b");
+
+    new Platform(screen.height - 50 * 2, (fifth * 4) - half, 250, 50, "#59ff8b", {
+        collision: ["bottom"],
+    });
     new Platform(screen.height - 50 * 2, (fifth * 2) - half, 250, 50, "#fc476b");
-    new Platform(screen.height - 50 * 2, (fifth * 4) - half, 250, 50, "#fc476b");
-
-    console.log(items);
+    new Platform(0, 0, screen.width, 50, "#fc476b");
+    new Platform(0, 0, 20, screen.height, "#fc476b");
 
 
 
@@ -64,6 +84,11 @@ async function init() {
 class Rect {
     constructor(x, y, width, height, color, options = {}) {
 
+        const option = (opt, def) => {
+            this[opt] = options[opt] === undefined
+            ? def : options[opt];
+        };
+
         // Position on screen
         this.x = x;
         this.y = y;
@@ -88,6 +113,13 @@ class Rect {
         this.color = color;
 
 
+        // Collision
+        option("collision", ["top", "right", "bottom", "left"]);
+
+        // Gravity
+        option("gravity", false);
+
+
         // Add object to list of items
         items.push(this);
     }
@@ -106,56 +138,40 @@ class Rect {
         }
 
 
+
+        // Gravity
+        if (this.gravity && !this.colliding(["bottom"])) {
+            this.yv -= 1;
+        }
+
+
+
         // Move in the x direction
-        const moveX = (check, fn) => {
+        const moveX = (check, side, num) => {
             if (!check) return;
-            for (let i = 0; i < pos(this.xv) / 2; i++) fn();
+            repeat(pos(this.xv) / 4, () => {
+                this.colliding([side])
+                ? this.xv = 0 : this.x += num;
+            });
         };
-        const moveY = (check, fn) => {
+
+        moveX(this.xv > 0, "right", 1);
+        moveX(this.xv < 0, "left", -1);
+
+
+
+        // Move in the y direction
+        const moveY = (check, side, num) => {
             if (!check) return;
-            for (let i = 0; i < pos(this.yv) / 2; i++) fn();
+            repeat(pos(this.yv) / 4, () => {
+                this.colliding([side])
+                ? this.yv = 0 : this.y += num;
+            });
         };
 
-        // Move right
-        moveX(this.xv > 0, () => {
-            this.x += 1;
-            if (this.colliding(["right"])) {
-                this.x -= 1;
-                this.xv = 0;
-            }
-        });
+        moveY(this.yv > 0, "top", 1);
+        moveY(this.yv < 0, "bottom", -1);
 
-
-        // Move left
-        moveX(this.xv < 0, () => {
-            this.x -= 1;
-            if (this.colliding(["left"])) {
-                this.x += 1;
-                this.xv = 0;
-            }
-        });
-
-
-        // Move up
-        moveY(this.yv > 0, () => {
-            this.y += 1;
-            /*
-            if (this.colliding(["top"])) {
-                this.y -= 1;
-                this.yv = 0;
-            }
-             */
-        });
-
-
-        // Move down
-        moveY(this.yv < 0, () => {
-            this.y -= 1;
-            if (this.colliding(["bottom"])) {
-                this.y += 1;
-                this.yv = 0;
-            }
-        });
 
 
         // Prevent going offscreen
@@ -187,14 +203,17 @@ class Rect {
 
 
         // Display its xv and yv
-        ctx.beginPath();
-        ctx.fillStyle = "#080808";
-        ctx.font = "20px Freemono, monospace";
-        ctx.textAlign = "center";
-        ctx.fillText(
-            `${this.xv} ${this.yv}`,
-            this.x + (this.width / 2), canvasY(this.y + this.height + 5),
-        );
+        if (debug) {
+            ctx.beginPath();
+            ctx.fillStyle = "#080808";
+            ctx.font = "20px Freemono, monospace";
+            ctx.textAlign = "center";
+            ctx.fillText(
+                `${this.xv}<br> ${this.yv}`,
+                this.x + (this.width / 2), canvasY(this.y + this.height + 5),
+            );
+        }
+
     }
 
     colliding(sides = ["top", "bottom", "right", "left"]) {
@@ -222,13 +241,19 @@ class Rect {
             const sameX = inrange([AR, AL], BL, BR);
             const sameY = inrange([AT, AB], BB, BT);
 
+            const bside = (str) => {
+                return b.collision === false ? false
+                : b.collision.find((s) => s === str);
+            };
+
+
             const checks = [
-                side("right") && sameY && AR === BL,
-                side("left") && sameY && AL === BR,
-                side("top") && sameX && AT === BB,
-                side("bottom") && sameX && AB === BT,
+                side("right") && sameY && AR === BL && bside("left"),
+                side("left") && sameY && AL === BR && bside("right"),
+                side("top") && sameX && AT === BB && bside("bottom"),
+                side("bottom") && sameX && AB === BT && bside("top"),
             ];
-            if (debug) {
+            if (false) {
                 console.log([
                     "\n - - - - - - -",
                     `AX: ${this.x}`,
@@ -258,7 +283,7 @@ class Player extends Rect {
     constructor(x, y, width, height, color, options) {
         super(x, y, width, height, color, options);
 
-        const newLoop = (fn) => setInterval(fn, 50);
+        const newLoop = (fn) => setInterval(fn, 16);
 
 
 
@@ -276,9 +301,9 @@ class Player extends Rect {
                 this.leftLoopID = newLoop(() => this.xv -= 1);
             }
 
-            // Start moving up
-            else if (key === "W" && !this.upLoopID) {
-                this.upLoopID = newLoop(() => this.yv += 1);
+            // Jump
+            else if (key === "W") {
+                if (this.colliding(["bottom", "left", "right"])) this.yv += 40;
             }
 
             // Start moving down
