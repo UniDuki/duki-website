@@ -2,3 +2,87 @@ body {
     font-family: Freemono, monospace;
     color: #080808;
 }
+
+
+/* Buttons */
+button {
+    font-family: inherit;
+
+    border: 2px solid #080808;
+    border-radius: 5px;
+
+    background-color: #8f6d6d00;
+
+    transition: background-color 0.1s, color 0.1s;
+
+    font-size: 15px;
+
+    min-height: 30px;
+    min-width: 60px;
+}
+
+button:hover {
+    color: #f8f8f8;
+
+    background-color: #08080890;
+}
+
+
+/* Input boxes */
+input[type="number"] {
+    height: 20px;
+    width: 60px;
+}
+
+
+/* Main container */
+#main-container {
+    border: 3px solid #080808;
+    border-radius: 4px;
+}
+#main-container > * {
+    padding: 15px;
+}
+
+
+/* Stats */
+#stats {
+    background-color: #ff8a8a;
+    
+    border-bottom: 2px solid #080808;
+}
+
+
+/* Settings for the simulator */
+#settings {
+    background-color: #fffa75;
+}
+
+#settings > * {
+    margin: 5px 0;
+}
+
+
+/* Log of coinflips */
+#log {
+    height: 200px;
+    overflow-y: scroll;
+    background-color: #303342;
+
+    font-size: 80%;
+
+    color: #f8f8f8;
+
+    border-top: 2px solid #080808;
+    border-bottom: 2px solid #080808;
+}
+
+
+/* Buttons */
+#buttons {
+    background-color: #7dffaf;
+}
+
+#buttons > * {
+    margin: 5px 0;
+}
