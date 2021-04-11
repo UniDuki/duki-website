@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Title and Favicon -->
+    <title>doko</title>
+    <link rel="shortcut icon" href="/images/logo.ico"/>
+
+
+    <!-- Navbar and Fontawesome Icons -->
+    <script src="/navbar/navbar.js"></script>
+    <link href="/fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet">
+
+
+    <!-- Javascript and CSS -->
+    <script src="./index.js"></script>
+    <link rel="stylesheet" href="./index.css">
+
+</head>
+<body onload="init();">
+    
+    <div id="main-container">
+
+        <!-- Coinflip stats -->
+        <div id="stats">
+            <p>Money: £<span id="money">0</span></p>
+        </div>
+
+
+        <!-- Settings for the simulator -->
+        <div id="settings">
+
+            <label for="bet">Bet:</label>
+            <input type="number" id="bet" value="1000" min="0" step="100">
+
+            <br>
+
+            <label for="tax">Tax Percentage:</label>
+            <input type="number" id="tax" value="5" min="0" max="100"step="5">
+
+            <br>
+
+            <label for="tax">Your color:</label>
+            <select id="color">
+                <option value="red">Red</option>
+                <option value="orange">Orange</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="purple">Purple</option>
+                <option value="black">Black</option>
+                <option value="white">White</option>
+            </select>
+        </div>
+
+
+        <!-- Log of coinflips -->
+        <div id="log"></div>
+        
+
+        <!-- Buttons -->
+        <div id="buttons">
+            <button onclick="flip(1);">Flip the coin</button>
+            <br>
+            <button onclick="flip(10);">Flip the coin 10 times</button>
+        </div>
+
+    </div>
+
+</body>
+</html>
