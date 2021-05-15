@@ -31,8 +31,7 @@ async function init() {
     const half = (fifth / 2) + 25;
 
     new Player((screen.width / 2) - 10, (screen.height / 2) - 10, 20, 20, "#78d6ff", {
-        z: 1,
-        gravity: true,
+        z: 1, gravity: true,
     });
 
     new Platform(150, (fifth * 4) - half, 150, 20, "#fffc57", {
@@ -113,11 +112,12 @@ class Rect {
         this.color = color;
 
 
-        // Collision
+        // Options
         option("collision", ["top", "right", "bottom", "left"]);
 
-        // Gravity
         option("gravity", false);
+
+        option("weight", 2);
 
 
         // Add object to list of items
@@ -141,7 +141,7 @@ class Rect {
 
         // Gravity
         if (this.gravity && !this.colliding(["bottom"])) {
-            this.yv -= 1;
+            this.yv -= this.weight;
         }
 
 
@@ -149,7 +149,7 @@ class Rect {
         // Move in the x direction
         const moveX = (check, side, num) => {
             if (!check) return;
-            repeat(pos(this.xv) / 4, () => {
+            repeat(pos(this.xv) / 8, () => {
                 this.colliding([side])
                 ? this.xv = 0 : this.x += num;
             });
@@ -163,7 +163,7 @@ class Rect {
         // Move in the y direction
         const moveY = (check, side, num) => {
             if (!check) return;
-            repeat(pos(this.yv) / 4, () => {
+            repeat(pos(this.yv) / 8, () => {
                 this.colliding([side])
                 ? this.yv = 0 : this.y += num;
             });
@@ -301,8 +301,9 @@ class Player extends Rect {
     constructor(x, y, width, height, color, options) {
         super(x, y, width, height, color, options);
 
-        const newLoop = (fn) => setInterval(fn, 16);
+        this.jumping = false;
 
+        const newLoop = (fn) => setInterval(fn, 16);
 
 
         document.addEventListener("keydown", (event) => {
@@ -311,22 +312,24 @@ class Player extends Rect {
 
             // Start moving right
             if (key === "D" && !this.rightLoopID) {
-                this.rightLoopID = newLoop(() => this.xv += 1);
+                this.rightLoopID = newLoop(() => this.xv += 2);
             }
 
             // Start moving left
             else if (key === "A" && !this.leftLoopID) {
-                this.leftLoopID = newLoop(() => this.xv -= 1);
+                this.leftLoopID = newLoop(() => this.xv -= 2);
             }
 
             // Jump
             else if (key === "W") {
-                if (this.colliding(["bottom", "left", "right"])) this.yv += 40;
+                if (this.colliding(["bottom"])) this.jump("up");
+                if (this.colliding(["left"])) this.jump("right");
+                if (this.colliding(["right"])) this.jump("left");
             }
 
             // Start moving down
             else if (key === "S" && !this.downLoopID) {
-                this.downLoopID = newLoop(() => this.yv -= 1);
+                this.downLoopID = newLoop(() => this.yv -= 2);
             }
 
             if (key === "G") debug =  debug ? false : true;
@@ -348,10 +351,9 @@ class Player extends Rect {
                 this.leftLoopID = undefined;
             }
 
-            // Stop moving up
-            else if (key === "W" && this.upLoopID) {
-                clearInterval(this.upLoopID);
-                this.upLoopID = undefined;
+            // Stop jumping
+            else if (key === "W") {
+                clearInterval(this.jumpLoopID);
             }
 
             // Stop moving down
@@ -361,6 +363,25 @@ class Player extends Rect {
             }
 
         });
+    }
+
+    jump(direction) {
+        if (this.jumping === false) {
+            const jumpLoop = (fn, time) => this.jumpLoopID = setInterval(fn, time);
+
+            if (direction === "up") {jumpLoop(() => this.yv += 1, 1);}
+
+            else if (direction === "right") {jumpLoop(() => {
+                this.yv += 2;
+                this.xv += 2;
+            }, 1);}
+            else if (direction === "left") {jumpLoop(() => {
+                this.yv -= 2;
+                this.xv -= 2;
+            }, 1);}
+
+            setTimeout(clearInterval, 170, this.jumpLoopID);
+        }
     }
 }
 
