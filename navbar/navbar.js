@@ -10,6 +10,7 @@ async function initNavbar() {
         ] },
         { title: "Tools", pages: [
             { title: "Combinations", name: "comb-calc" },
+            { title: "Coinflip", name: "coinflip" },
         ] },
     ];
 

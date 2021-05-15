@@ -8,7 +8,7 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
-
+ 
 
 .clickable {
     color: #245d9e;
@@ -22,7 +22,7 @@ body {
     font-size: 20px;
     text-align: center;
 
-    border-bottom: 1px solid #080808;
+    border-bottom: 1px dotted #080808;
     width: 100%;
 
     display: block;
@@ -36,4 +36,23 @@ td {
     width: 16px;
     height: 16px;
     border: 1px solid #080808;
+}
+
+
+
+#countdown {
+    text-align: center;
+    padding: 10px;
+
+    user-select: none;
+}
+
+#countdown-container {
+    margin: auto;
+    width: fit-content;
+
+    background-color: #f5ff6c;
+
+    border-radius: 10px;
+    border: 2px solid #080808;
 }
