@@ -15,7 +15,6 @@ const palletes = [
     { name: "fire", colors: ["#fac000", "#fc6400", "#d73502", "#b62203", "#801100"] },
     { name: "sunset", colors: ["#f8b195", "#f67280", "#c06c84", "#6c5b7b", "#355c7d"] },
     { name: "sweet", colors: ["#a8e6ce", "#dcedc2", "#ffd3b5", "#ffaaa6", "#ff8c94"] },
-    { name: "rgb", colors: ["#ff0000", "#00ff00", "#0000ff"] },
     { name: "rainbow", colors: createPallete(361, "&, 100%, 75%") },
 ];
 
