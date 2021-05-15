@@ -1,42 +1,33 @@
 // Util functions
-const randrange = (min, max) =>
-    Math.floor(Math.random() * (max + 1 - min) + min);
+const randrange = (min, max) => Math.floor(Math.random() * ((max + 1) - min) + min);
 
 const toNum = (num) => parseInt(num, 10);
 
-const getDiffrence = (a, b) => (a > b ? a - b : b - a);
+const getDiffrence = (a, b) => a > b ? a - b : b - a;
 
 const createPallete = (length, hsl) => {
-    return new Array(length)
-        .fill()
-        .map((_, i) => `hsl(${hsl})`.replaceAll("&", i));
+    return new Array(length).fill().map((_, i) => `hsl(${hsl})`.replaceAll("&", i));
 };
 
 const palletes = [
     { name: "light", colors: createPallete(361, "&, 100%, 75%") },
     { name: "grey", colors: createPallete(100, "0, 0%, &%") },
-    {
-        name: "fire",
-        colors: ["#fac000", "#fc6400", "#d73502", "#b62203", "#801100"],
-    },
-    {
-        name: "sunset",
-        colors: ["#f8b195", "#f67280", "#c06c84", "#6c5b7b", "#355c7d"],
-    },
-    {
-        name: "sweet",
-        colors: ["#a8e6ce", "#dcedc2", "#ffd3b5", "#ffaaa6", "#ff8c94"],
-    },
+    { name: "fire", colors: ["#fac000", "#fc6400", "#d73502", "#b62203", "#801100"] },
+    { name: "sunset", colors: ["#f8b195", "#f67280", "#c06c84", "#6c5b7b", "#355c7d"] },
+    { name: "sweet", colors: ["#a8e6ce", "#dcedc2", "#ffd3b5", "#ffaaa6", "#ff8c94"] },
     { name: "rgb", colors: ["#ff0000", "#00ff00", "#0000ff"] },
     { name: "rainbow", colors: createPallete(361, "&, 100%, 75%") },
 ];
 
+
 const stats = false;
 let paused = false;
+
 
 // Canvas size
 const width = 500;
 const height = 500;
+
 
 // Varibles needed to be accessed out of their scope
 let speed, size, pallete, layers;
@@ -46,8 +37,11 @@ let shapes = {};
 // Array to store all balls
 const balls = [];
 
+
+
 // Initalization function
 async function init() {
+
     await initNavbar();
 
     elements.ballOutlines = document.getElementById("ballOutlines");
@@ -65,6 +59,7 @@ async function init() {
 
     updateBallAmount();
 
+
     // Main loop
     setInterval(() => {
         if (paused) return;
@@ -78,9 +73,12 @@ async function init() {
     }, 16);
 }
 
+
+
 // Ball class
 class Ball {
     constructor() {
+
         this.resetSize();
 
         this.resetColor();
@@ -97,10 +95,8 @@ class Ball {
     }
 
     reset() {
-        this.resetColor();
-        this.resetPosition();
-        this.resetSize();
-        this.resetSpeed();
+        this.resetColor(); this.resetPosition();
+        this.resetSize(); this.resetSpeed();
         this.resetShape();
     }
 
@@ -120,13 +116,13 @@ class Ball {
     }
 
     resetColor() {
-        this.color =
-            pallete.colors[Math.floor(Math.random() * pallete.colors.length)];
+        this.color = pallete.colors[Math.floor(Math.random() * pallete.colors.length)];
     }
 
     resetShape() {
         this.shape = shapes[Math.floor(Math.random() * shapes.length)];
     }
+
 
     move() {
         const bounceType = document.getElementById("bounceType").value;
@@ -138,11 +134,14 @@ class Ball {
         this.x = distance * Math.cos(this.angle * (Math.PI / 180)) + this.x;
         this.y = distance * Math.sin(this.angle * (Math.PI / 180)) + this.y;
 
+
         // Walls
         let hitLeft, hitRight, hitTop, hitBottom;
 
+
         // Check if ball is past right or left wall
         if (this.x + this.size > width || this.x - this.size < 0) {
+
             hitLeft = this.x - this.size <= 0;
             hitRight = hitLeft ? false : true;
 
@@ -152,8 +151,10 @@ class Ball {
             bounce();
         }
 
+
         // Check if ball is past top or bottom wall
         if (this.y + this.size > height || this.y - this.size < 0) {
+
             hitTop = this.y - this.size <= 0;
             hitBottom = hitTop ? false : true;
 
@@ -175,6 +176,7 @@ class Ball {
             ↖ NW = 225°
         */
 
+
         // Make sure angle is between 0 and 360
         function checkAngle(angle) {
             if (angle > 360) checkAngle(angle - 360);
@@ -183,9 +185,9 @@ class Ball {
         }
         checkAngle(this.angle);
 
+
         // Bounce
-        if (bounceType === "curved90" && Math.random() > 0.1)
-            this.angle += this.curve;
+        if (bounceType === "curved90" && Math.random() > 0.1) this.angle += this.curve;
 
         function bounce() {
             switch (bounceType) {
@@ -198,8 +200,8 @@ class Ball {
                     break;
 
                 case "about90":
-                    ball.angle +=
-                        (Math.random() > 0.5 ? 90 : -90) + randrange(-5, 5);
+                    ball.angle += (Math.random() > 0.5 ? 90 : -90)
+                    + randrange(-5, 5);
                     break;
 
                 case "random":
@@ -231,12 +233,7 @@ class Ball {
         const square = (layer, x, y, squareSize, color) => {
             squareSize *= 2;
             layer.beginPath();
-            layer.rect(
-                x - squareSize / 2,
-                y - squareSize / 2,
-                squareSize,
-                squareSize,
-            );
+            layer.rect(x - squareSize / 2, y - squareSize / 2, squareSize, squareSize);
             layer.fillStyle = color;
             layer.fill();
         };
@@ -251,13 +248,14 @@ class Ball {
             switch (ball.shape) {
                 case "square":
                     square(layer, x, y, bsize, color);
-                    break;
+                break;
 
                 case "circle":
                     circle(layer, x, y, bsize, color);
-                    break;
+                break;
             }
         };
+
 
         // Rainbow balls
         if (pallete.name === "rainbow") {
@@ -269,8 +267,10 @@ class Ball {
         // Draw ball
         drawShape(ballsLayer, this.x, this.y, this.size, this.color);
 
+
         // Ball outlines
         if (elements.ballOutlines.checked) outline(ballsLayer);
+
 
         // Ball trails
         if (elements.ballTrails.checked) {
@@ -283,6 +283,7 @@ class Ball {
                     break;
             }
         }
+
 
         // Ball paths
         if (elements.ballPaths.checked) {
@@ -301,37 +302,33 @@ class Ball {
     }
 }
 
+
+
 // Set up shapes
 function setupShapes() {
     // Get all the checkboxes
-    const checkboxes = Array.from(
-        document.getElementById("shapes").querySelectorAll("* > *"),
-    ).filter((e) => e.type === "checkbox");
+    const checkboxes = Array.from(document.getElementById("shapes")
+    .querySelectorAll("* > *")).filter((e) => e.type === "checkbox");
 
     const circle = checkboxes.find((c) => c.id === "shapes-circle");
 
     // Function to set shapes to the checked checkboxes
     const setShapes = () => {
-        shapes = checkboxes
-            .filter((c) => c.checked)
-            .map((c) => c.id.replace("shapes-", ""));
+        shapes = checkboxes.filter((c) => c.checked)
+        .map((c) => c.id.replace("shapes-", ""));
     };
     setShapes();
 
     // When box is clicked set shapes
-    checkboxes.forEach(
-        (box) =>
-            (box.onclick = (event) => {
-                if (
-                    !box.checked &&
-                    checkboxes.filter((c) => c.checked).length === 0
-                ) {
-                    return (circle.checked = true);
-                }
-                setShapes();
-            }),
-    );
+    checkboxes.forEach((box) => box.onclick = (event) => {
+        if (!box.checked && checkboxes.filter((c) => c.checked).length === 0) {
+            return circle.checked = true;
+        }
+        setShapes();
+    });
 }
+
+
 
 // Keep the number input synced with the slider
 function syncSlider() {
@@ -348,6 +345,7 @@ function syncSlider() {
     });
 }
 
+
 // Update amount of balls
 function updateBallAmount() {
     const slider = document.getElementById("slider");
@@ -358,11 +356,12 @@ function updateBallAmount() {
     }
 }
 
+
 // Create the palletes and change pallete on selection change
 function setupPalletes() {
+
     const palleteSelection = document.getElementById("palletes");
-    const findPallete = () =>
-        palletes.find((p) => p.name === palleteSelection.value);
+    const findPallete = () => palletes.find((p) => p.name === palleteSelection.value);
 
     pallete = findPallete();
     palleteSelection.addEventListener("input", () => {
@@ -370,6 +369,7 @@ function setupPalletes() {
         balls.forEach((ball) => ball.resetColor());
     });
 }
+
 
 // Set the min and max of speed and size
 function setupSpeedAndSize() {
@@ -391,11 +391,13 @@ function setupSpeedAndSize() {
 
     // Listeners
     const speedListener = () =>
-        (speed = getMinMax(speedInput, speedDifferInput));
+    speed = getMinMax(speedInput, speedDifferInput);
     speedListener();
 
-    const sizeListener = () => (size = getMinMax(sizeInput, sizeDifferInput));
+    const sizeListener = () =>
+    size = getMinMax(sizeInput, sizeDifferInput);
     sizeListener();
+
 
     speedInput.addEventListener("input", speedListener);
     speedDifferInput.addEventListener("input", speedListener);
@@ -403,6 +405,8 @@ function setupSpeedAndSize() {
     sizeInput.addEventListener("input", sizeListener);
     sizeDifferInput.addEventListener("input", sizeListener);
 }
+
+
 
 // Layers
 function setupLayers() {
@@ -427,30 +431,22 @@ function getLayer(id) {
     return layers.find((layer) => layer.id === id).getContext("2d");
 }
 
+
+
 // Reset functions
-function resetColors() {
-    balls.forEach((b) => b.resetColor());
-}
+function resetColors() { balls.forEach((b) => b.resetColor()); }
 
-function resetSpeeds() {
-    balls.forEach((b) => b.resetSpeed());
-}
+function resetSpeeds() { balls.forEach((b) => b.resetSpeed()); }
 
-function resetShapes() {
-    balls.forEach((b) => b.resetShape());
-}
+function resetShapes() { balls.forEach((b) => b.resetShape()); }
 
-function resetSizes() {
-    balls.forEach((b) => b.resetSize());
-}
+function resetSizes() { balls.forEach((b) => b.resetSize()); }
 
-function resetPositions() {
-    balls.forEach((b) => b.resetPosition());
-}
+function resetPositions() { balls.forEach((b) => b.resetPosition()); }
 
-function resetBalls() {
-    balls.forEach((b) => b.reset());
-}
+function resetBalls() { balls.forEach((b) => b.reset()); }
+
+
 
 // Pause
 function pause() {
@@ -459,36 +455,38 @@ function pause() {
     document.getElementById("pause").innerHTML = paused ? "Resume" : "Pause";
 }
 
+
+
 // Set up dropdowns
 function setupDropdowns() {
-    Array.from(document.getElementsByClassName("dropdown")).forEach(
-        (dropdown) => {
-            const button = dropdown.querySelectorAll(".dropdown-button")[0];
-            const content = dropdown.querySelectorAll(".dropdown-content")[0];
+    Array.from(document.getElementsByClassName("dropdown")).forEach((dropdown) => {
 
-            // When button is clicked toggle visibility
-            button.onclick = (event) => {
-                content.style.display =
-                    content.style.display === "block" ? "none" : "block";
-            };
+        const button = dropdown.querySelectorAll(".dropdown-button")[0];
+        const content = dropdown.querySelectorAll(".dropdown-content")[0];
 
-            // When anything but content or button is clicked hide content
-            window.onclick = (event) => {
-                if (content.style.display === "none") return;
+        // When button is clicked toggle visibility
+        button.onclick = (event) => {
+            content.style.display = content.style.display === "block"
+            ? "none" : "block";
+        };
 
-                if ([button, content].includes(event.target)) {
-                    content.style.display === "none";
-                }
-            };
-        },
-    );
+        // When anything but content or button is clicked hide content
+        window.onclick = (event) => {
+            if (content.style.display === "none") return;
+
+            if ([button, content].includes(event.target)) {
+                content.style.display === "none";
+            }
+        };
+    });
 }
+
+
 
 // Working min max
 function setupMinMax() {
-    const numInputs = Array.from(document.getElementsByTagName("input")).filter(
-        (input) => input.type === "number",
-    );
+    const numInputs = Array.from(document.getElementsByTagName("input"))
+    .filter((input) => input.type === "number");
 
     numInputs.forEach((input) => {
         input.onblur = (e) => {
