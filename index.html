@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+        <!-- Meta -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Meta -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Title and Favicon -->
+        <title>doko</title>
+        <link rel="shortcut icon" href="/images/logo.ico" />
 
+        <!-- Navbar and Fontawesome Icons -->
+        <script src="/navbar/navbar.js"></script>
+        <link
+            href="/fontawesome-free-5.15.2-web/css/all.css"
+            rel="stylesheet"
+        />
 
-    <!-- Title and Favicon -->
-    <title>doko</title>
-    <link rel="shortcut icon" href="/images/logo.ico"/>
+        <!-- Javascript and CSS -->
+        <script src="./index.js"></script>
+        <link rel="stylesheet" href="./index.css" />
+    </head>
+    <body onload="init();">
+        <p class="title">What is this?</p>
+        <p>
+            You can play some games I made by going to the
+            <span onclick="toggleSidebar()" class="clickable">siderbar</span>,
+            then clicking on the one you want to play.
+        </p>
 
+        <br /><br /><br /><br /><br />
 
-    <!-- Navbar and Fontawesome Icons -->
-    <script src="/navbar/navbar.js"></script>
-    <link href="/fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet">
-
-
-    <!-- Javascript and CSS -->
-    <script src="./index.js"></script>
-    <link rel="stylesheet" href="./index.css">
-    
-    
-</head>
-<body onload="init();">
-
-    <p class="title">What is this?</p>
-    <p>
-        You can play some games I made by going to the
-        <span onclick="toggleSidebar()" class="clickable">siderbar</span>,
-        then clicking on the one you want to play.
-    </p>
-
-</body>
+        <div id="countdown-container">
+            <p id="countdown"></p>
+        </div>
+    </body>
 </html>

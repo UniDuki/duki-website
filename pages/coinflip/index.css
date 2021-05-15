@@ -4,16 +4,18 @@ body {
 }
 
 
+
 /* Buttons */
 button {
+    cursor: pointer;
     font-family: inherit;
 
     border: 2px solid #080808;
     border-radius: 5px;
 
-    background-color: #8f6d6d00;
+    background-color: #00000000;
 
-    transition: background-color 0.1s, color 0.1s;
+    transition: background-color 0.28s, color 0.28s;
 
     font-size: 15px;
 
@@ -28,6 +30,7 @@ button:hover {
 }
 
 
+
 /* Input boxes */
 input[type="number"] {
     height: 20px;
@@ -35,14 +38,19 @@ input[type="number"] {
 }
 
 
+
 /* Main container */
 #main-container {
     border: 3px solid #080808;
     border-radius: 4px;
+
+    max-width: 1000px;
+    margin: auto;
 }
 #main-container > * {
     padding: 15px;
 }
+
 
 
 /* Stats */
@@ -53,14 +61,21 @@ input[type="number"] {
 }
 
 
+
 /* Settings for the simulator */
 #settings {
+    position: relative;
     background-color: #fffa75;
 }
 
 #settings > * {
     margin: 5px 0;
 }
+
+#bet {
+    width: fit-content;
+}
+
 
 
 /* Log of coinflips */
@@ -78,11 +93,54 @@ input[type="number"] {
 }
 
 
-/* Buttons */
-#buttons {
+
+/* Coinflip */
+#coinflip {
     background-color: #7dffaf;
 }
 
-#buttons > * {
+#coinflip > * {
     margin: 5px 0;
+}
+
+#timesToFlip {
+    border: none;
+    border-bottom: 2px solid #080808;
+
+    text-align: center;
+
+    background-color: #7dffaf;
+}
+
+
+
+/* Advanced settings */
+#advanced {
+    color: #37373a;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    float: right;
+
+    font-size: 30px;
+
+    border: none;
+}
+
+#advanced:hover {
+    color: #5b5b9c;
+    background-color: unset;
+}
+
+
+
+/* Remove number input arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

@@ -2,6 +2,9 @@
 const random = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const format = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+const pos = (num) => Math.abs(num);
+const neg = (num) => -Math.abs(num);
+
 
 
 let money = 10000;
@@ -15,6 +18,8 @@ const colors = {
 
 async function init() {
     await initNavbar();
+    utilInit();
+
     setupMinMax();
 
     updateMoney();
@@ -60,12 +65,15 @@ function coinflip() {
         `${playerHTML} vs ${botHTML}`,
         `The coin landed on ${win ? playerHTML : botHTML}`,
 
-        `${ctext(`${netmsg[0]} ${format(net)}`, netmsg[1])}`,
-    ].join("<br>");
+        `${ctext(`${netmsg[0]} ${format(pos(net))}`, netmsg[1])}`,
+    ];
 
-    log.innerHTML += text + "<br><br><br>";
+    text.forEach((line, i) => { setTimeout(() => {
+        log.innerHTML += line + "<br>";
+        log.scrollTop = log.scrollHeight;
+    }, i * 1000); });
 
-    log.scrollTop = log.scrollHeight;
+    log.innerHTML += "<br><br><br>";
 }
 
 

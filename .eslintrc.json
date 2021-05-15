@@ -6,7 +6,7 @@
 	"parserOptions": {
 		"ecmaVersion": 2019
 	},
-	"rules": {
+	"rules": { 
 		/* "comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
 		"comma-style": "error",
