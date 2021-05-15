@@ -1,1 +1,5 @@
+node_modules/
 fontawesome-free-5.15.2-web/
+
+package-lock.json
+package.json
