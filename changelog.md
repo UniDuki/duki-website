@@ -1,30 +1,31 @@
 # Changelog
-All notable changes to this project will be documented in this file
+All notable changes to this website will be documented in this file  
 **Date Format:** DD/MM/YYYY
-
-
+&nbsp;
 
 ## [1.1.0] - 15/05/2021
-### Added
+#### Added
 - New color preview tool
 
-### Changed
-- Started to remake bounce game
+#### Changed
+- Started to remake bounce game  
 
-
+&nbsp;  
+&nbsp;
 
 ## [1.0.1] - 15/05/2021
-### Added
+#### Added
 - Specified which date format changelog uses in changelog file
 
-### Changed
+#### Changed
 - Minor changes to sidebar BETA info text
-- Fixed title underlines being dotted instead of solid
+- Fixed title underlines being dotted instead of solid  
 
-
+&nbsp;  
+&nbsp;
 
 ## [1.0.0] - 15/05/2021
-### Added
+#### Added
 - Changelog
 
 
