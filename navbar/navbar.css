@@ -111,6 +111,8 @@ body {
     transform: translateX(-102vw);
 
     background-color: #252530;
+
+    font-family: FreeMono, monospace;
 }
 
 .sidebar-title {

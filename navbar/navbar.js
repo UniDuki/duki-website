@@ -10,7 +10,7 @@ async function initNavbar() {
         ] },
         { title: "Tools", pages: [
             { title: "Combinations", name: "comb-calc" },
-            { title: "Coinflip", name: "coinflip" },
+            { title: "Color Preview", name: "color-preview" },
         ] },
     ];
 
@@ -58,7 +58,7 @@ async function initNavbar() {
 
     info.classList.add("sidebar-info");
 
-    info.innerText += "Pages labeled [BETA] are under development and may not work properly";
+    info.innerText += "Pages labeled [BETA] are currently under development and may not work as intended";
 
     sidebarHTML.appendChild(info);
 

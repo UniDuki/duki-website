@@ -1,0 +1,29 @@
+body {
+    font-family: Freemono, monospace;
+    color: #080808;
+}
+
+#main-container {
+    margin-right: auto;
+    margin-left: auto;
+
+    width: max-content;
+    height: max-content;
+}
+
+#text {
+    padding: 5px;
+
+    border: 2px solid #080808;
+    border-radius: 5px;
+
+    background-color: #43445a;
+    color: #ffffff;
+
+    min-height: 100px;
+
+    min-width: 300px;
+    max-width: 1000px;
+
+    white-space: pre-wrap;
+}
