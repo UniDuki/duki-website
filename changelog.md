@@ -3,6 +3,14 @@ All notable changes to this website will be documented in this file
 **Date Format:** DD/MM/YYYY
 &nbsp;
 
+## [1.2.0] - 15/05/2021
+#### Added
+- New analog clock tool
+
+&nbsp;  
+&nbsp;
+
+
 ## [1.1.0] - 15/05/2021
 #### Added
 - New color preview tool
@@ -10,8 +18,10 @@ All notable changes to this website will be documented in this file
 #### Changed
 - Started to remake bounce game  
 
+
 &nbsp;  
 &nbsp;
+
 
 ## [1.0.1] - 15/05/2021
 #### Added

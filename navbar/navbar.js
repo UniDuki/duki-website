@@ -11,6 +11,7 @@ async function initNavbar() {
         { title: "Tools", pages: [
             { title: "Combinations", name: "comb-calc" },
             { title: "Color Preview", name: "color-preview" },
+            { title: "Clock", name: "clock" },
         ] },
     ];
 

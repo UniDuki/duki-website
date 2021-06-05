@@ -1,0 +1,27 @@
+body {
+    font-family: Freemono, monospace;
+    color: #080808;
+    
+    transition: background-color 3s
+}
+
+.clock {
+    margin: auto;
+
+    width: 30em;
+    height: 30em;
+
+    border: 2em solid #212127;
+    border-radius: 50%;
+
+    box-shadow: 20px 20px 30px #2c2c304d;
+
+    background-color: #ebebeb;
+}
+
+.clock > * {
+    position: absolute;
+
+    width: 30em;
+    height: 30em;
+}

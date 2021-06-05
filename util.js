@@ -5,6 +5,28 @@
 
 */
 
+const Util = {};
+(() => {
+
+    // Terminal
+    class Terminal {
+        constructor(id) {
+            const elem = document.getElementById(id);
+
+        }
+    }
+
+    Util.terminal = (id) => {
+        const terminal = new Terminal(id);
+        return terminal;
+    };
+
+})();
+
+
+
+
+
 // Init util
 function utilInit() {
     utilPopups();
